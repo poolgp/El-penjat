@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El penjat</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="titulo">
+        <h1>El Penjat</h1>
+    </div>
+
+    <div class="juego">
+        <div class="penjat">
+            <div class="tematica">
+                <span class="nameUser">Nom d'usuari: </span>
+                <span id="name">Nom</span>
+                <span class="temaTematica">Temàtica: </span>
+                <span id="tema">Tema</span>
+            </div>
+
+            <div class="cuerpo">
+                <div class="imgPenjat">
+                    <div class="col1">
+                        <div class="img3 ocultar">
+                            <img src="./img/Penjat3.png" id="P3" width="150px" height="150px">
+                        </div>
+                        <div class="img4 ocultar">
+                            <img src="./img/Penjat4.png" id="P4" width="150px" height="150px">
+                        </div>
+                    </div>
+                    <div class="col2">
+                        <div class="img2 ocultar">
+                            <img src="./img/Penjat2.png" id="P2" width="150px" height="150px">
+                        </div>
+                        <div class="img5 ocultar">
+                            <img src="./img/Penjat5.png" id="P5" width="150px" height="150px">
+                        </div>
+                    </div>
+                    <div class="col3">
+                        <div class="img1 ocultar">
+                            <img src="./img/Penjat1.png" id="P1" height="150px" width="150px">
+                        </div>
+                        <div class="img6 ocultar">
+                            <img src="./img/Penjat6.png" id="P6" width="150px" height="150px">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palabra" id="palabra">
+
+                </div>
+
+                <div class="errores">
+                    <div class="contadorErrores">
+                        <span id="titulo">Numero d'errors: </span>
+                        <span id="score">0</span>
+                        <span class="total">6</span>
+                    </div>
+                </div>
+
+                <div class="imgFinal" style="display: none;">
+                    <img src="#" width="400px" height="450px" />
+                </div>
+
+                <div class="descripcionFinal" id="descripcionFinal" style="display: none;">
+                    <h3 class="titolFinal" id="titolFinal"></h3>
+                    <p class="descripcion" id="descripcion"></p>
+                </div>
+
+            </div>
+
+            <div class="letras">
+                <form id="idForm" action="#" method="post">
+                    <div class="userContainer">
+                        <label for="inputNameUser">Nom d'Usuari: </label>
+                        <input type="text" id="inputNameUser" name="inputNameUser" placeholder="Introdueix el teu nom">
+                        <br>
+                        <button type="submit">Jugar</button>
+                    </div>
+                </form>
+
+                <div id="containerLletras">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
