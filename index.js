@@ -184,9 +184,7 @@ function actualitzarContadorErrores() {
   comprobarFiJoc();
 }
 
-function palabraCompleta() {
-
-}
+function palabraCompleta() {}
 
 function comprobarFiJoc() {
   if (numErrores === MAXERRORES) {
