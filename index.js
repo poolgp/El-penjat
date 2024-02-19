@@ -193,15 +193,15 @@ function comprobarFiJoc() {
 }
 
 function finJoc() {
-  document.getElementById("idForm").style.display = "none";
-  const imgFinal = document.querySelector(".imgFinal");
-  imgFinal.style.display = "block";
-  const descripcionFinal = document.querySelector(".descripcionFinal");
-  descripcionFinal.style.display = "block";
+  // document.getElementById("idForm").style.display = "none";
+  // const imgFinal = document.querySelector(".imgFinal");
+  // imgFinal.style.display = "block";
+  // const descripcionFinal = document.querySelector(".descripcionFinal");
+  // descripcionFinal.style.display = "block";
 
-  const abcContainer = document.getElementById("containerLletras");
-  abcContainer.style.display = "none";
+  // const abcContainer = document.getElementById("containerLletras");
+  // abcContainer.style.display = "none";
 
-  imgFinal.src = palabraSeleccionada.imagen;
-  descripcionFinal.textContent = palabraSeleccionada.descripcion;
+  // imgFinal.src = palabraSeleccionada.imagen;
+  // descripcionFinal.textContent = palabraSeleccionada.descripcion;
 }
