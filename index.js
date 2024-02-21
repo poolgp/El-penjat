@@ -181,6 +181,9 @@ function mostrarLetra(letraClick) {
 
 function actualitzarContadorErrores() {
   document.getElementById("score").textContent = numErrores;
+
+
+  
   comprobarFiJoc();
 }
 
@@ -193,15 +196,19 @@ function comprobarFiJoc() {
 }
 
 function finJoc() {
-  // document.getElementById("idForm").style.display = "none";
-  // const imgFinal = document.querySelector(".imgFinal");
-  // imgFinal.style.display = "block";
-  // const descripcionFinal = document.querySelector(".descripcionFinal");
-  // descripcionFinal.style.display = "block";
+  document.getElementById("idForm").style.display = "none";
+  const imgFinal = document.querySelector(".imgFinal");
+  imgFinal.style.display = "block";
 
-  // const abcContainer = document.getElementById("containerLletras");
-  // abcContainer.style.display = "none";
+  const descripcionFinal = document.querySelector(".descripcionFinal");
+  descripcionFinal.style.display = "block";
 
-  // imgFinal.src = palabraSeleccionada.imagen;
-  // descripcionFinal.textContent = palabraSeleccionada.descripcion;
+  const abcContainer = document.getElementById("containerLletras");
+  abcContainer.style.display = "none";
+
+  const contadorErrores = document.getElementById("contadorErrores");
+  contadorErrores.style.display = "none";
+
+  imgFinal.src = palabraSeleccionada.imagen;
+  descripcionFinal.textContent = palabraSeleccionada.descripcion;
 }
