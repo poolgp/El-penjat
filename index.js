@@ -85,7 +85,7 @@ function mostrarNombre() {
 }
 
 function selectParaula() {
-  palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)]; // guarda el nom, la img, la descripcio i la tematica
+  palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)];
   arrayPalabra = palabraSeleccionada.nombre.split("");
 }
 
@@ -106,11 +106,11 @@ function mostrarTematica() {
 }
 
 function ocultar() {
-  document.getElementById("idForm").style.display = "none";
+  document.getElementById("idForm").style.visibility = "hidden";
 
   const elementosOcultar = document.getElementsByClassName("ocultar");
   for (let i = 0; i < elementosOcultar.length; i++) {
-    elementosOcultar[i].style.display = "none";
+    elementosOcultar[i].style.visibility = "hidden";
   }
 }
 
@@ -182,12 +182,27 @@ function mostrarLetra(letraClick) {
 function actualitzarContadorErrores() {
   document.getElementById("score").textContent = numErrores;
 
-
-  
+  mostrarImg();
   comprobarFiJoc();
 }
 
-function palabraCompleta() {}
+function palabraCompleta() {
+  elUsuarioCompletoLaPalabra = false;
+  const completa = document.getElementById("palabra").textContent;
+  /*console.log(typeof(palabraSeleccionada.nombre));
+  console.log(typeof(completa));*/
+
+  if (palabraSeleccionada.nombre === completa) {
+    finJoc();
+  }
+}
+
+function mostrarImg() {
+  let numErrores = document.getElementById("score").textContent;
+
+  let imagen = document.getElementById("P" + numErrores);
+  imagen.style.visibility = "visible";
+}
 
 function comprobarFiJoc() {
   if (numErrores === MAXERRORES) {
@@ -198,11 +213,16 @@ function comprobarFiJoc() {
 function finJoc() {
   document.getElementById("idForm").style.display = "none";
   const imgFinal = document.querySelector(".imgFinal");
-  imgFinal.style.display = "block";
-  imgFinal.src = palabraSeleccionada.imagen;
+  imgFinal.style.visibility = "visible";
+
+  const finalImg = document.getElementById("finalImg");
+  finalImg.src = palabraSeleccionada.imagen;
 
   const descripcionFinal = document.querySelector(".descripcionFinal");
   descripcionFinal.style.display = "block";
+
+  const palabraContainer = document.getElementById("palabra");
+  palabraContainer.style.display = "none";
 
   const abcContainer = document.getElementById("containerLletras");
   abcContainer.style.display = "none";
