@@ -199,6 +199,7 @@ function finJoc() {
   document.getElementById("idForm").style.display = "none";
   const imgFinal = document.querySelector(".imgFinal");
   imgFinal.style.display = "block";
+  imgFinal.src = palabraSeleccionada.imagen;
 
   const descripcionFinal = document.querySelector(".descripcionFinal");
   descripcionFinal.style.display = "block";
@@ -209,6 +210,9 @@ function finJoc() {
   const contadorErrores = document.getElementById("contadorErrores");
   contadorErrores.style.display = "none";
 
-  imgFinal.src = palabraSeleccionada.imagen;
-  descripcionFinal.textContent = palabraSeleccionada.descripcion;
+  const titolFinal = document.getElementById("titolFinal");
+  titolFinal.textContent = palabraSeleccionada.nombre;
+
+  const descripcion = document.getElementById("descripcion");
+  descripcion.textContent = palabraSeleccionada.descripcion;
 }
