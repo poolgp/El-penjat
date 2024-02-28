@@ -235,4 +235,11 @@ function finJoc() {
 
   const descripcion = document.getElementById("descripcion");
   descripcion.textContent = palabraSeleccionada.descripcion;
+
+  const tornarJugar = document.getElementById("tornarJugar");
+  tornarJugar.style.visibility = "visible";
+}
+
+function tornarJugar() {
+  location.reload();
 }
