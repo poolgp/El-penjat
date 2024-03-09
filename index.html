@@ -6,16 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>El penjat</title>
 
-        <!-- <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-            crossorigin="anonymous">
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script> -->
-
         <link rel="stylesheet" href="index.css">
     </head>
 
@@ -75,7 +65,7 @@
                         <div class="contadorErrores" id="contadorErrores">
                             <span id="titulo">Numero d'errors: </span>
                             <span id="score">0</span>
-                            <span class="total">6</span>
+                            <span class="total">/ 6</span>
                         </div>
                     </div>
 
@@ -88,27 +78,31 @@
                         <h3 class="titolFinal" id="titolFinal"></h3>
                         <p class="descripcion" id="descripcion"></p>
                     </div>
-
                 </div>
 
                 <div class="letras">
                     <form id="idForm" action="#" method="post">
                         <div class="userContainer">
-                            <label for="inputNameUser">Nom d'Usuari: </label>
-                            <input type="text" id="inputNameUser"
+                            <label for="inputNameUser" class="inputNameUser">Nom
+                                d'Usuari: </label>
+                            <input type="text" class="inputNameUser"
+                                id="inputNameUser"
                                 name="inputNameUser"
-                                placeholder="Introdueix el teu nom">
+                                placeholder="Introdueix el teu nom" required>
                             <br>
-                            <button type="submit">Jugar</button>
+                            <button class="btnJugar" id="btnJugar"
+                                type="submit">Jugar</button>
                         </div>
                     </form>
 
                     <div id="containerLletras">
-
                     </div>
+
                     <div id="tornarJugar" style="visibility: hidden;">
-                        <button class="tornarJugar" id="tornarJugar"
+                        <button class="btnTornarJugar" id="btnTornarJugar"
                             onclick="tornarJugar()">Tornar a Jugar</button>
+                        <button class="btnSortir" id="btnSortir"
+                            onclick="limpiarLocalStorage()">Sortir</button>
                     </div>
                 </div>
             </div>
