@@ -105,6 +105,16 @@ function ocultar() {
   }
 }
 
+document.addEventListener("keydown", function (event) {
+  if (/^[a-zA-Z]$/.test(event.key)) {
+    const letraPresionada = event.key.toUpperCase();
+
+    comprobarLetraPorTeclado(letraPresionada);
+
+    event.preventDefault();
+  }
+});
+
 function mostrarAbc() {
   abcSeparado = abc.split("");
 
@@ -125,10 +135,19 @@ function mostrarAbc() {
     aElement.id = `caracter-${caracter}`;
     aElement.textContent = caracter;
 
-    aElement.onclick = function (event) {
+    const comprobarLetraEvento = function (event) {
       comprobarLetra(event);
-      aElement.onclick = null;
+      aElement.removeEventListener("click", comprobarLetraEvento);
     };
+
+    aElement.onclick = comprobarLetraEvento;
+
+    document.addEventListener("keydown", function (event) {
+      if (/^[a-zA-Z]$/.test(event.key) && event.key.toUpperCase() === caracter) {
+        comprobarLetraPorTeclado(caracter);
+        aElement.removeEventListener("click", comprobarLetraEvento);
+      }
+    });
 
     if (i < 10) {
       abc1.appendChild(aElement);
@@ -138,6 +157,7 @@ function mostrarAbc() {
       abc3.appendChild(aElement);
     }
   });
+
 
   container.appendChild(abc1);
   container.appendChild(abc2);
@@ -157,6 +177,21 @@ function comprobarLetra(event) {
     letraElement.style.color = "red";
     actualitzarContadorErrores();
     letraElement.removeEventListener("click", comprobarLetra);
+  }
+}
+
+function comprobarLetraPorTeclado(letra) {
+  let letraElement = document.getElementById(`caracter-${letra}`);
+
+  if (arrayPalabra.includes(letra)) {
+    mostrarLetra(letra);
+    letraElement.style.color = "green";
+    letraElement.removeEventListener("click", comprobarLetraPorTeclado);
+  } else {
+    numErrores++;
+    letraElement.style.color = "red";
+    actualitzarContadorErrores();
+    letraElement.removeEventListener("click", comprobarLetraPorTeclado);
   }
 }
 
@@ -296,7 +331,7 @@ function tornarJugar() {
 //   .addEventListener("submit", function startGame(event) {
 //     event.preventDefault();
 
-//     validarNombre();
+//     mostrarNombre();
 //     selectParaula();
 //     mostrarPalabra();
 //     mostrarTematica();
@@ -304,19 +339,10 @@ function tornarJugar() {
 //     mostrarAbc();
 //   });
 
-// function validarNombre() {
-//   let userName = document.getElementById("inputNameUser").value;
-
-//   if (userName.trim() === "") {
-//     alert("Si us plau, introdueix un nom.");
-//     return;
-//   } else {
-//     localStorage.setItem("nombreUsuario", userName);
-//     mostrarNombre();
-//   }
-// }
-
 // function mostrarNombre() {
+//   let userName = document.getElementById("inputNameUser").value;
+//   localStorage.setItem("nombreUsuario", userName);
+
 //   let nameStorage = localStorage.getItem("nombreUsuario");
 //   let nameSpan = document.getElementById("name");
 //   nameSpan.textContent = nameStorage;
@@ -479,5 +505,6 @@ function tornarJugar() {
 // }
 
 // function tornarJugar() {
+
 //   location.reload();
 // }
