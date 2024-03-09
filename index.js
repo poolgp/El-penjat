@@ -7,7 +7,7 @@ let palabras = [
     tematica: "Nom d'un país",
   },
   {
-    nombre: "FRANCA",
+    nombre: "FRANÇA",
     imagen: "./img/TorreEiffel.jpg",
     descripcion:
       "França, al cor d'Europa occidental, és coneguda per la seva rica història, el seu art excepcional, la seva exquisida gastronomia i la seva diversitat geogràfica. Des dels encisadors paisatges de la Provença fins a la majestuositat dels Alps, França ofereix una barreja única de tradició i modernitat. Les seves ciutats, com París amb la Torre Eiffel, reflecteixen l'elegància i la sofisticació, mentre que els seus poblets pintorescos i el seu patrimoni cultural contribueixen al seu atractiu atemporal. Amb una influència duradora en la moda, la literatura i la filosofia, França continua sent un destí culturalment ric i captivador.",
@@ -46,7 +46,7 @@ let palabras = [
 let palabraSeleccionada;
 let arrayPalabra;
 let palabraDiv;
-let abc = "QWERTYUIOPASDFGHJKLZXCVBNM";
+let abc = "QWERTYUIOPASDFGHJKLÇZXCVBNM";
 let abcSeparado;
 let letraClick;
 const MAXERRORES = 6;
