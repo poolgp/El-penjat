@@ -46,7 +46,7 @@ let palabras = [
 let palabraSeleccionada;
 let arrayPalabra;
 let palabraDiv;
-let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let abc = "QWERTYUIOPASDFGHJKLZXCVBNM";
 let abcSeparado;
 let letraClick;
 const MAXERRORES = 6;
