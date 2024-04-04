@@ -52,6 +52,8 @@ let letraClick;
 const MAXERRORES = 6;
 let numErrores = 0;
 const abcContainer = document.getElementById("containerLletras");
+let letraCorrecta = [];
+let letraIncorrecta = [];
 
 document
   .getElementById("idForm")
@@ -97,7 +99,6 @@ function mostrarTematica() {
 }
 
 function ocultar() {
-  //ocultar Form i imgs
   document.getElementById("idForm").style.visibility = "hidden";
 
   const elementosOcultar = document.getElementsByClassName("ocultar");
@@ -145,6 +146,22 @@ function mostrarAbc() {
   container.appendChild(abc3);
 }
 
+// function comprobarLetra(event) {
+//   letraClick = event.target.textContent;
+//   let letraElement = document.getElementById(`caracter-${letraClick}`);
+
+//   if (arrayPalabra.includes(letraClick)) {
+//     mostrarLetra(letraClick);
+//     letraElement.style.color = "green";
+//     letraElement.removeEventListener("click", comprobarLetra);
+//   } else {
+//     numErrores++;
+//     letraElement.style.color = "red";
+//     actualitzarContadorErrores();
+//     letraElement.removeEventListener("click", comprobarLetra);
+//   }
+// }
+
 function comprobarLetra(event) {
   letraClick = event.target.textContent;
   let letraElement = document.getElementById(`caracter-${letraClick}`);
@@ -153,11 +170,17 @@ function comprobarLetra(event) {
     mostrarLetra(letraClick);
     letraElement.style.color = "green";
     letraElement.removeEventListener("click", comprobarLetra);
+
+    letraCorrecta.push(letraClick);
+    localStorage.setItem("letraCorrecta", JSON.stringify(letraCorrecta));
   } else {
     numErrores++;
     letraElement.style.color = "red";
     actualitzarContadorErrores();
     letraElement.removeEventListener("click", comprobarLetra);
+
+    letraIncorrecta.push(letraClick);
+    localStorage.setItem("letraIncorrecta", JSON.stringify(letraIncorrecta));
   }
 }
 
