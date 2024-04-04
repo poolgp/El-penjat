@@ -45,6 +45,7 @@ let palabras = [
 
 let palabraSeleccionada;
 let arrayPalabra;
+let palabraLocal=[];
 let palabraDiv;
 let abc = "QWERTYUIOPASDFGHJKLÇZXCVBNM";
 let abcSeparado;
@@ -80,6 +81,9 @@ function mostrarNombre() {
 function selectParaula() {
   palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)];
   arrayPalabra = palabraSeleccionada.nombre.split("");
+
+  palabraLocal.push(palabraSeleccionada);
+  localStorage.setItem("Palabra", JSON.stringify(palabraLocal));
 }
 
 function mostrarPalabra() {
