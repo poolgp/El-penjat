@@ -45,7 +45,7 @@ let palabras = [
 
 let palabraSeleccionada;
 let arrayPalabra;
-let palabraLocal=[];
+let palabraLocal = [];
 let palabraDiv;
 let abc = "QWERTYUIOPASDFGHJKLÇZXCVBNM";
 let abcSeparado;
