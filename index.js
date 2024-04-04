@@ -12,7 +12,7 @@ let palabras = [
     descripcion:
       "França, al cor d'Europa occidental, és coneguda per la seva rica història, el seu art excepcional, la seva exquisida gastronomia i la seva diversitat geogràfica. Des dels encisadors paisatges de la Provença fins a la majestuositat dels Alps, França ofereix una barreja única de tradició i modernitat. Les seves ciutats, com París amb la Torre Eiffel, reflecteixen l'elegància i la sofisticació, mentre que els seus poblets pintorescos i el seu patrimoni cultural contribueixen al seu atractiu atemporal. Amb una influència duradora en la moda, la literatura i la filosofia, França continua sent un destí culturalment ric i captivador.",
     tematica: "Nom d'un país",
-  }
+  },
 ];
 
 let palabraSeleccionada;
@@ -201,3 +201,35 @@ function finJoc() {
   const tornarJugar = document.getElementById("tornarJugar");
   tornarJugar.style.visibility = "visible";
 }
+
+function resetGame() {
+  numErrores = 0;
+  document.getElementById("score").textContent = numErrores;
+  document.getElementById("idForm").style.visibility = "visible";
+  document.querySelector(".imgFinal").style.visibility = "hidden";
+  document.querySelector(".descripcionFinal").style.display = "none";
+  document.getElementById("palabra").style.display = "block";
+  document.getElementById("containerLletras").style.display = "block";
+  document.getElementById("contadorErrores").style.display = "block";
+  document.getElementById("tornarJugar").style.visibility = "hidden";
+
+  abcSeparado.forEach((caracter) => {
+    const letraElement = document.getElementById(`caracter-${caracter}`);
+    letraElement.style.color = "";
+    letraElement.onclick = function (event) {
+      comprobarLetra(event);
+      letraElement.onclick = null;
+    };
+  });
+
+  selectParaula();
+
+  mostrarPalabra();
+  mostrarTematica();
+
+  for (let i = 1; i <= MAXERRORES; i++) {
+    document.getElementById("P" + i).style.visibility = "hidden";
+  }
+}
+
+document.getElementById("btnTornarJugar").addEventListener("click", resetGame);
