@@ -257,7 +257,7 @@ function finJoc() {
   tornarJugar.style.visibility = "visible";
 }
 
-function resetGame() {
+function tornarJugar() {
   numErrores = 0;
   document.getElementById("score").textContent = numErrores;
   document.getElementById("idForm").style.visibility = "visible";
@@ -267,6 +267,12 @@ function resetGame() {
   document.getElementById("containerLletras").style.display = "block";
   document.getElementById("contadorErrores").style.display = "block";
   document.getElementById("tornarJugar").style.visibility = "hidden";
+
+  localStorage.clear();
+
+  // localStorage.removeItem("Palabra");
+  // localStorage.removeItem("letraCorrecta");
+  // localStorage.removeItem("letraIncorrecta");
 
   abcSeparado.forEach((caracter) => {
     const letraElement = document.getElementById(`caracter-${caracter}`);
