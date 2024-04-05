@@ -45,7 +45,6 @@ let palabras = [
 
 let palabraSeleccionada;
 let arrayPalabra;
-let palabraLocal = [];
 let palabraDiv;
 let abc = "QWERTYUIOPASDFGHJKLÇZXCVBNM";
 let abcSeparado;
@@ -56,8 +55,12 @@ const abcContainer = document.getElementById("containerLletras");
 let letraCorrecta = [];
 let letraIncorrecta = [];
 
-document.getElementById("btnTornarJugar").addEventListener("click", tornarJugar);
-document.getElementById("btnSortir").addEventListener("click", limpiarLocalStorage);
+document
+  .getElementById("btnTornarJugar")
+  .addEventListener("click", tornarJugar);
+document
+  .getElementById("btnSortir")
+  .addEventListener("click", limpiarLocalStorage);
 
 document
   .getElementById("idForm")
@@ -84,9 +87,8 @@ function mostrarNombre() {
 function selectParaula(valor) {
   palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)];
   arrayPalabra = palabraSeleccionada.nombre.split("");
-console.log("PARAULA: " + palabraSeleccionada.nombre + " -- " +valor);
-  palabraLocal.push(palabraSeleccionada);
-  localStorage.setItem("Palabra", JSON.stringify(palabraLocal));
+  console.log("PARAULA: " + palabraSeleccionada.nombre + " -- " + valor);
+  localStorage.setItem("Palabra", JSON.stringify(palabraSeleccionada));
 }
 
 function mostrarPalabra() {
@@ -152,22 +154,6 @@ function mostrarAbc() {
   container.appendChild(abc2);
   container.appendChild(abc3);
 }
-
-// function comprobarLetra(event) {
-//   letraClick = event.target.textContent;
-//   let letraElement = document.getElementById(`caracter-${letraClick}`);
-
-//   if (arrayPalabra.includes(letraClick)) {
-//     mostrarLetra(letraClick);
-//     letraElement.style.color = "green";
-//     letraElement.removeEventListener("click", comprobarLetra);
-//   } else {
-//     numErrores++;
-//     letraElement.style.color = "red";
-//     actualitzarContadorErrores();
-//     letraElement.removeEventListener("click", comprobarLetra);
-//   }
-// }
 
 function comprobarLetra(event) {
   letraClick = event.target.textContent;
@@ -274,6 +260,8 @@ function tornarJugar() {
   localStorage.removeItem("Palabra");
   localStorage.removeItem("letraCorrecta");
   localStorage.removeItem("letraIncorrecta");
+  letraCorrecta = [];
+  letraIncorrecta = [];
 
   abcSeparado.forEach((caracter) => {
     const letraElement = document.getElementById(`caracter-${caracter}`);
