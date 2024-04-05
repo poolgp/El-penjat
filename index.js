@@ -56,6 +56,9 @@ const abcContainer = document.getElementById("containerLletras");
 let letraCorrecta = [];
 let letraIncorrecta = [];
 
+document.getElementById("btnTornarJugar").addEventListener("click", tornarJugar);
+document.getElementById("btnSortir").addEventListener("click", limpiarLocalStorage);
+
 document
   .getElementById("idForm")
   .addEventListener("submit", function startGame(event) {
@@ -78,10 +81,10 @@ function mostrarNombre() {
   nameSpan.textContent = nameStorage;
 }
 
-function selectParaula() {
+function selectParaula(valor) {
   palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)];
   arrayPalabra = palabraSeleccionada.nombre.split("");
-
+console.log("PARAULA: " + palabraSeleccionada.nombre + " -- " +valor);
   palabraLocal.push(palabraSeleccionada);
   localStorage.setItem("Palabra", JSON.stringify(palabraLocal));
 }
@@ -268,11 +271,9 @@ function tornarJugar() {
   document.getElementById("contadorErrores").style.display = "block";
   document.getElementById("tornarJugar").style.visibility = "hidden";
 
-  localStorage.clear();
-
-  // localStorage.removeItem("Palabra");
-  // localStorage.removeItem("letraCorrecta");
-  // localStorage.removeItem("letraIncorrecta");
+  localStorage.removeItem("Palabra");
+  localStorage.removeItem("letraCorrecta");
+  localStorage.removeItem("letraIncorrecta");
 
   abcSeparado.forEach((caracter) => {
     const letraElement = document.getElementById(`caracter-${caracter}`);
@@ -283,7 +284,7 @@ function tornarJugar() {
     };
   });
 
-  selectParaula();
+  selectParaula(1);
 
   mostrarPalabra();
   mostrarTematica();
@@ -293,4 +294,7 @@ function tornarJugar() {
   }
 }
 
-document.getElementById("btnTornarJugar").addEventListener("click", resetGame);
+function limpiarLocalStorage() {
+  localStorage.clear();
+  location.reload();
+}
