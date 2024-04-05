@@ -43,6 +43,7 @@ let palabras = [
   },
 ];
 
+let userName;
 let palabraSeleccionada;
 let arrayPalabra;
 let palabraDiv;
@@ -76,7 +77,7 @@ document
   });
 
 function mostrarNombre() {
-  let userName = document.getElementById("inputNameUser").value;
+  userName = document.getElementById("inputNameUser").value;
   localStorage.setItem("nombreUsuario", userName);
 
   let nameStorage = localStorage.getItem("nombreUsuario");
@@ -87,7 +88,7 @@ function mostrarNombre() {
 function selectParaula(valor) {
   palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)];
   arrayPalabra = palabraSeleccionada.nombre.split("");
-  console.log("PARAULA: " + palabraSeleccionada.nombre + " -- " + valor);
+  // console.log("PARAULA: " + palabraSeleccionada.nombre + " -- " + valor);
   localStorage.setItem("Palabra", JSON.stringify(palabraSeleccionada));
 }
 
@@ -168,6 +169,7 @@ function comprobarLetra(event) {
     localStorage.setItem("letraCorrecta", JSON.stringify(letraCorrecta));
   } else {
     numErrores++;
+    localStorage.setItem("Errors", JSON.stringify(numErrores));
     letraElement.style.color = "red";
     actualitzarContadorErrores();
     letraElement.removeEventListener("click", comprobarLetra);
@@ -260,6 +262,8 @@ function tornarJugar() {
   localStorage.removeItem("Palabra");
   localStorage.removeItem("letraCorrecta");
   localStorage.removeItem("letraIncorrecta");
+  localStorage.removeItem("Errors");
+
   letraCorrecta = [];
   letraIncorrecta = [];
 
