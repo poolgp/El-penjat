@@ -63,6 +63,43 @@ document
   .getElementById("btnSortir")
   .addEventListener("click", limpiarLocalStorage);
 
+window.addEventListener("load", function () {
+  let storedName = localStorage.getItem("nombreUsuario");
+  let storedErrors = localStorage.getItem("Errors");
+  let storedCorrectLetters = JSON.parse(localStorage.getItem("letraCorrecta")) || [];
+  let storedIncorrectLetters = JSON.parse(localStorage.getItem("letraIncorrecta")) || [];
+
+  if (storedName) {
+    let nameSpan = document.getElementById("name");
+    nameSpan.textContent = storedName;
+  }
+
+  if (storedErrors) {
+    numErrores = parseInt(storedErrors);
+    document.getElementById("score").textContent = numErrores;
+    mostrarImg();
+    comprobarFiJoc();
+  }
+
+  if (storedCorrectLetters.length > 0 || storedIncorrectLetters.length > 0) {
+    storedCorrectLetters.forEach(function (letter) {
+      mostrarLetra(letter);
+      let letterElement = document.getElementById(`caracter-${letter}`);
+      letterElement.style.color = "green";
+      letterElement.removeEventListener("click", comprobarLetra);
+    });
+
+    storedIncorrectLetters.forEach(function (letter) {
+      numErrores++;
+      let letterElement = document.getElementById(`caracter-${letter}`);
+      letterElement.style.color = "red";
+      letterElement.removeEventListener("click", comprobarLetra);
+      actualitzarContadorErrores();
+    });
+  }
+});
+
+
 document
   .getElementById("idForm")
   .addEventListener("submit", function startGame(event) {
