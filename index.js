@@ -48,17 +48,33 @@ let nameStorage; //nombre del user del local storage
 let palabraSeleccionada; //Math random palabra
 let arrayPalabra; //palabra split
 let palabraDiv; //Div donde se imprime la parabraSplit
+let abc = "QWERTYUIOPASDFGHJKLÇZXCVBNM";
+let abcSeparado;
+let letraClick;
+const MAXERRORES = 6;
+let numErrores = 0;
+const abcContainer = document.getElementById("containerLletras");
+let letraCorrecta = [];
+let letraIncorrecta = [];
+
+document.onload();
+
+function strat(){
+  inciiar();
+}
 
 function startJuego() {
-  guardarNombre();
-  mostrarNombre();
-  generarPalabra();
-  guardarPalabra();
-  mostrarTematica();
-  mostrarPalabra();
-  ocultar();
-  mostrarAbc();
-}
+  setTimeout(() => {
+    guardarNombre();
+    mostrarNombre();
+    generarPalabra();
+    guardarPalabra();
+    mostrarTematica();
+    mostrarPalabra();
+    ocultar();
+    mostrarAbc();
+  }, 1);
+  }
 
 function guardarNombre() {
   nombreUsuario = document.getElementById("inputNameUser").value;
@@ -142,4 +158,133 @@ function mostrarAbc() {
   container.appendChild(abc1);
   container.appendChild(abc2);
   container.appendChild(abc3);
+}
+
+function comprobarLetra(event) {
+  letraClick = event.target.textContent;
+  let letraElement = document.getElementById(`caracter-${letraClick}`);
+
+  if (arrayPalabra.includes(letraClick)) {
+    mostrarLetra(letraClick);
+    letraElement.style.color = "green";
+    letraElement.removeEventListener("click", comprobarLetra);
+
+    letraCorrecta.push(letraClick);
+    localStorage.setItem("letraCorrecta", JSON.stringify(letraCorrecta));
+  } else {
+    numErrores++;
+    localStorage.setItem("Errors", JSON.stringify(numErrores));
+    letraElement.style.color = "red";
+    actualitzarContadorErrores();
+    letraElement.removeEventListener("click", comprobarLetra);
+
+    letraIncorrecta.push(letraClick);
+    localStorage.setItem("letraIncorrecta", JSON.stringify(letraIncorrecta));
+  }
+}
+
+function mostrarLetra(letraClick) {
+  for (let i = 0; i < arrayPalabra.length; i++) {
+    if (arrayPalabra[i] === letraClick) {
+      let indiceNodo = i;
+      palabraDiv.childNodes[indiceNodo].textContent = letraClick;
+    }
+    palabraCompleta();
+  }
+}
+
+function actualitzarContadorErrores() {
+  document.getElementById("score").textContent = numErrores;
+
+  mostrarImg();
+  comprobarFiJoc();
+}
+
+function palabraCompleta() {
+  elUsuarioCompletoLaPalabra = false;
+  const completa = document.getElementById("palabra").textContent;
+
+  if (palabraSeleccionada.nombre === completa) {
+    finJoc();
+  }
+}
+
+function mostrarImg() {
+  let numErrores = document.getElementById("score").textContent;
+
+  let imagen = document.getElementById("P" + numErrores);
+  imagen.style.visibility = "visible";
+}
+
+function finJoc() {
+  document.getElementById("idForm").style.display = "none";
+  const imgFinal = document.querySelector(".imgFinal");
+  imgFinal.style.visibility = "visible";
+
+  const finalImg = document.getElementById("finalImg");
+  finalImg.src = palabraSeleccionada.imagen;
+
+  const descripcionFinal = document.querySelector(".descripcionFinal");
+  descripcionFinal.style.display = "block";
+
+  const palabraContainer = document.getElementById("palabra");
+  palabraContainer.style.display = "none";
+
+  const abcContainer = document.getElementById("containerLletras");
+  abcContainer.style.display = "none";
+
+  const contadorErrores = document.getElementById("contadorErrores");
+  contadorErrores.style.display = "none";
+
+  const titolFinal = document.getElementById("titolFinal");
+  titolFinal.textContent = palabraSeleccionada.nombre;
+
+  const descripcion = document.getElementById("descripcion");
+  descripcion.textContent = palabraSeleccionada.descripcion;
+
+  const tornarJugar = document.getElementById("tornarJugar");
+  tornarJugar.style.visibility = "visible";
+}
+
+function tornarJugar() {
+  numErrores = 0;
+  document.getElementById("score").textContent = numErrores;
+  document.getElementById("idForm").style.visibility = "visible";
+  document.querySelector(".imgFinal").style.visibility = "hidden";
+  document.querySelector(".descripcionFinal").style.display = "none";
+  document.getElementById("palabra").style.display = "block";
+  document.getElementById("containerLletras").style.display = "block";
+  document.getElementById("contadorErrores").style.display = "block";
+  document.getElementById("tornarJugar").style.visibility = "hidden";
+
+  localStorage.removeItem("Palabra");
+  localStorage.removeItem("letraCorrecta");
+  localStorage.removeItem("letraIncorrecta");
+  localStorage.removeItem("Errors");
+
+  letraCorrecta = [];
+  letraIncorrecta = [];
+
+  abcSeparado.forEach((caracter) => {
+    const letraElement = document.getElementById(`caracter-${caracter}`);
+    letraElement.style.color = "";
+    letraElement.onclick = function (event) {
+      comprobarLetra(event);
+      letraElement.onclick = null;
+    };
+  });
+
+  selectParaula(1);
+
+  mostrarPalabra();
+  mostrarTematica();
+
+  for (let i = 1; i <= MAXERRORES; i++) {
+    document.getElementById("P" + i).style.visibility = "hidden";
+  }
+}
+
+function limpiarLocalStorage() {
+  localStorage.clear();
+  location.reload();
 }
