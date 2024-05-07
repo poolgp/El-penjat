@@ -63,73 +63,78 @@ document
   .getElementById("btnSortir")
   .addEventListener("click", limpiarLocalStorage);
 
-window.addEventListener("load", function () {
-  let storedName = localStorage.getItem("nombreUsuario");
-  let storedErrors = localStorage.getItem("Errors");
-  let storedCorrectLetters = JSON.parse(localStorage.getItem("letraCorrecta")) || [];
-  let storedIncorrectLetters = JSON.parse(localStorage.getItem("letraIncorrecta")) || [];
+// window.onload = function () {
+//   if (localStorage.getItem("Palabra")) {
+//     let palabraSeleccionada = JSON.parse(localStorage.getItem("Palabra"));
+//     arrayPalabra = palabraSeleccionada.nombre.split("");
+//     mostrarPalabra();
+//     mostrarTematica();
+//     ocultar();
+//     mostrarAbc();
+//   }
 
-  if (storedName) {
-    let nameSpan = document.getElementById("name");
-    nameSpan.textContent = storedName;
-  }
+//   if (localStorage.getItem("letraCorrecta")) {
+//     letraCorrecta = JSON.parse(localStorage.getItem("letraCorrecta"));
+//   }
 
-  if (storedErrors) {
-    numErrores = parseInt(storedErrors);
-    document.getElementById("score").textContent = numErrores;
-    mostrarImg();
-    comprobarFiJoc();
-  }
+//   if (localStorage.getItem("letraIncorrecta")) {
+//     letraIncorrecta = JSON.parse(localStorage.getItem("letraIncorrecta"));
+//   }
 
-  if (storedCorrectLetters.length > 0 || storedIncorrectLetters.length > 0) {
-    storedCorrectLetters.forEach(function (letter) {
-      mostrarLetra(letter);
-      let letterElement = document.getElementById(`caracter-${letter}`);
-      letterElement.style.color = "green";
-      letterElement.removeEventListener("click", comprobarLetra);
+//   if (localStorage.getItem("Errors")) {
+//     numErrores = JSON.parse(localStorage.getItem("Errors"));
+//     document.getElementById("score").textContent = numErrores;
+//     actualitzarContadorErrores();
+//   }
+// };
+
+window.onload = function () {
+  document
+    .getElementById("idForm")
+    .addEventListener("submit", function startGame(event) {
+      event.preventDefault();
+
+      if (localStorage.getItem("nombreUsuario")) {
+        mostrarNombre();
+      } else {
+        guardarNombre();
+        mostrarNombre();
+      }
+      if (localStorage.getItem("Palabra")) {
+      }
+
+      generarPalabra();
+      guardarPalabra();
+      selectParaula();
+      mostrarPalabra();
+      mostrarTematica();
+      ocultar();
+      mostrarAbc();
     });
+};
 
-    storedIncorrectLetters.forEach(function (letter) {
-      numErrores++;
-      let letterElement = document.getElementById(`caracter-${letter}`);
-      letterElement.style.color = "red";
-      letterElement.removeEventListener("click", comprobarLetra);
-      actualitzarContadorErrores();
-    });
-  }
-});
-
-
-document
-  .getElementById("idForm")
-  .addEventListener("submit", function startGame(event) {
-    event.preventDefault();
-
-    mostrarNombre();
-    selectParaula();
-    mostrarPalabra();
-    mostrarTematica();
-    ocultar();
-    mostrarAbc();
-  });
-
-function mostrarNombre() {
+function guardarNombre() {
   userName = document.getElementById("inputNameUser").value;
   localStorage.setItem("nombreUsuario", userName);
+}
 
+function mostrarNombre() {
   let nameStorage = localStorage.getItem("nombreUsuario");
   let nameSpan = document.getElementById("name");
   nameSpan.textContent = nameStorage;
 }
 
-function selectParaula(valor) {
+function generarPalabra() {
   palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)];
   arrayPalabra = palabraSeleccionada.nombre.split("");
-  // console.log("PARAULA: " + palabraSeleccionada.nombre + " -- " + valor);
+}
+
+function guardarPalabra(valor) {
   localStorage.setItem("Palabra", JSON.stringify(palabraSeleccionada));
 }
 
 function mostrarPalabra() {
+  let nameStorage = localStorage.getItem("nombreUsuario");
   palabraDiv = document.getElementById("palabra");
   palabraDiv.innerHTML = "";
 
@@ -140,10 +145,15 @@ function mostrarPalabra() {
 }
 
 function mostrarTematica() {
+  let palabraStorage = JSON.parse(localStorage.getItem("Palabra"));
   let tematicaSpan = document.getElementById("tema");
-  // console.log(palabraSeleccionada.tematica);
-  tematicaSpan.textContent = palabraSeleccionada.tematica;
+  tematicaSpan.textContent = palabraStorage.tematica;
 }
+
+// function mostrarTematica() {
+//   let tematicaSpan = document.getElementById("tema");
+//   tematicaSpan.textContent = palabraSeleccionada.tematica;
+// }
 
 function ocultar() {
   document.getElementById("idForm").style.visibility = "hidden";
