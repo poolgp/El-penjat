@@ -134,7 +134,6 @@ function guardarPalabra(valor) {
 }
 
 function mostrarPalabra() {
-  let nameStorage = localStorage.getItem("nombreUsuario");
   palabraDiv = document.getElementById("palabra");
   palabraDiv.innerHTML = "";
 
@@ -149,11 +148,6 @@ function mostrarTematica() {
   let tematicaSpan = document.getElementById("tema");
   tematicaSpan.textContent = palabraStorage.tematica;
 }
-
-// function mostrarTematica() {
-//   let tematicaSpan = document.getElementById("tema");
-//   tematicaSpan.textContent = palabraSeleccionada.tematica;
-// }
 
 function ocultar() {
   document.getElementById("idForm").style.visibility = "hidden";
