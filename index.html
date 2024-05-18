@@ -1,112 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>El penjat</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El penjat</title>
+    <link rel="stylesheet" href="index.css">
+</head>
 
-        <link rel="stylesheet" href="index.css">
-    </head>
-
-    <body>
-        <div class="titulo">
-            <h1>El Penjat</h1>
-        </div>
-
-        <div class="juego">
-            <div class="penjat">
-                <div class="tematica">
-                    <span class="nameUser">Nom d'usuari: </span>
-                    <span id="name">Nom</span>
-                    <span class="temaTematica">Temàtica: </span>
-                    <span id="tema">Tema</span>
-                </div>
-
-                <div class="cuerpo">
-                    <div class="imgPenjat">
-                        <div class="col1">
-                            <div class="img3 ocultar mostrar">
-                                <img src="./img/Penjat3.png" id="P3"
-                                    width="150px" height="150px">
-                            </div>
-                            <div class="img4 ocultar mostrar">
-                                <img src="./img/Penjat4.png" id="P4"
-                                    width="150px" height="150px">
-                            </div>
+<body>
+    <div class="titulo">
+        <h1>El Penjat</h1>
+    </div>
+    <div class="juego">
+        <div class="penjat">
+            <div class="tematica">
+                <span class="nameUser">Nom d'usuari: </span>
+                <span id="name">Nom</span>
+                <span class="temaTematica">Temàtica: </span>
+                <span id="tema">Tema</span>
+            </div>
+            <div class="cuerpo">
+                <div class="imgPenjat">
+                    <div class="col1">
+                        <div class="img3 ocultar mostrar">
+                            <img src="./img/Penjat3.png" id="P3" width="150px" height="150px">
                         </div>
-                        <div class="col2">
-                            <div class="img2 ocultar mostrar">
-                                <img src="./img/Penjat2.png" id="P2"
-                                    width="150px" height="150px">
-                            </div>
-                            <div class="img5 ocultar mostrar">
-                                <img src="./img/Penjat5.png" id="P5"
-                                    width="150px" height="150px">
-                            </div>
-                        </div>
-                        <div class="col3">
-                            <div class="img1 ocultar mostrar">
-                                <img src="./img/Penjat1.png" id="P1"
-                                    height="150px" width="150px">
-                            </div>
-                            <div class="img6 ocultar mostrar">
-                                <img src="./img/Penjat6.png" id="P6"
-                                    width="150px" height="150px">
-                            </div>
+                        <div class="img4 ocultar mostrar">
+                            <img src="./img/Penjat4.png" id="P4" width="150px" height="150px">
                         </div>
                     </div>
-
-                    <div class="palabra" id="palabra">
-
-                    </div>
-
-                    <div class="errores">
-                        <div class="contadorErrores" id="contadorErrores">
-                            <span id="titulo">Numero d'errors: </span>
-                            <span id="score">0</span>
-                            <span class="total">/ 6</span>
+                    <div class="col2">
+                        <div class="img2 ocultar mostrar">
+                            <img src="./img/Penjat2.png" id="P2" width="150px" height="150px">
+                        </div>
+                        <div class="img5 ocultar mostrar">
+                            <img src="./img/Penjat5.png" id="P5" width="150px" height="150px">
                         </div>
                     </div>
-
-                    <div class="imgFinal" id="imgFinal"
-                        style="visibility: hidden;">
-                        <img class="finalImg" id="finalImg" src width="400px"
-                            height="450px" />
-                    </div>
-                    <div class="descripcionFinal" id="descripcionFinal"
-                        style="display: none;">
-                        <h3 class="titolFinal" id="titolFinal"></h3>
-                        <p class="descripcion" id="descripcion"></p>
+                    <div class="col3">
+                        <div class="img1 ocultar mostrar">
+                            <img src="./img/Penjat1.png" id="P1" height="150px" width="150px">
+                        </div>
+                        <div class="img6 ocultar mostrar">
+                            <img src="./img/Penjat6.png" id="P6" width="150px" height="150px">
+                        </div>
                     </div>
                 </div>
-
-                <div class="letras">
-                    <form id="idForm" action="#" method="post">
-                        <div class="userContainer">
-                            <label for="inputNameUser" class="inputNameUser">Nom
-                                d'Usuari: </label>
-                            <input type="text" class="inputNameUser"
-                                id="inputNameUser"
-                                name="inputNameUser"
-                                placeholder="Introdueix el teu nom" required>
-                            <br>
-                            <button class="btnJugar" id="btnJugar" onclick="startJuego()">Jugar</button>
-                        </div>
-                    </form>
-
-                    <div id="containerLletras">
+                <div class="palabra" id="palabra"></div>
+                <div class="errores">
+                    <div class="contadorErrores" id="contadorErrores">
+                        <span id="titulo">Numero d'errors: </span>
+                        <span id="score">0</span>
+                        <span class="total">/ 6</span>
                     </div>
-
-                    <div id="tornarJugar" style="visibility: hidden;">
-                        <button class="btnTornarJugar"
-                            id="btnTornarJugar">Tornar a Jugar</button>
-                        <button class="btnSortir" id="btnSortir">Sortir</button>
+                </div>
+                <div class="imgFinal" id="imgFinal" style="visibility: hidden;">
+                    <img class="finalImg" id="finalImg" src width="400px" height="450px" />
+                </div>
+                <div class="descripcionFinal" id="descripcionFinal" style="display: none;">
+                    <h3 class="titolFinal" id="titolFinal"></h3>
+                    <p class="descripcion" id="descripcion"></p>
+                </div>
+            </div>
+            <div class="letras">
+                <form id="idForm" action="#" method="post" onsubmit="startJuego(event)">
+                    <div class="userContainer">
+                        <label for="inputNameUser" class="inputNameUser">Nom d'Usuari: </label>
+                        <input type="text" class="inputNameUser" id="inputNameUser" name="inputNameUser"
+                            placeholder="Introdueix el teu nom" required>
+                        <br>
+                        <button type="submit" class="btnJugar" id="btnJugar">Jugar</button>
                     </div>
+                </form>
+                <div id="containerLletras"></div>
+                <div id="tornarJugar" style="visibility: hidden;">
+                    <button class="btnTornarJugar" id="btnTornarJugar" onclick="tornarJugar()">Tornar a Jugar</button>
+                    <button class="btnSortir" id="btnSortir" onclick="limpiarLocalStorage()">Sortir</button>
                 </div>
             </div>
         </div>
-        <script src="index.js"></script>
-    </body>
+    </div>
+    <script src="index.js"></script>
+</body>
 
 </html>
