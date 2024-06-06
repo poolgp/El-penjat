@@ -15,6 +15,7 @@ let lletresUtilitzades = [];
 let usuari = "";
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Referències als elements del DOM
   const formDiv = document.querySelector(".formDiv");
   const jocDiv = document.querySelector(".jocDiv");
   const btnJugar = document.getElementById("btnJugar");
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnReiniciar = document.getElementById("reiniciar");
   const btnSortir = document.getElementById("sortir");
 
+  // Si hi ha un estat del joc guardat, el carrega
   if (localStorage.getItem("estatJoc")) {
     const estatJoc = JSON.parse(localStorage.getItem("estatJoc"));
     paraulaSeleccionada = estatJoc.paraulaSeleccionada;
@@ -41,14 +43,19 @@ document.addEventListener("DOMContentLoaded", function () {
     jocDiv.style.display = "flex";
   }
 
+  // Event listener per al botó de jugar
   btnJugar.addEventListener("click", function (e) {
     e.preventDefault();
     iniciarJoc();
   });
 
+  // Event listener per al botó de reiniciar el joc
   btnReiniciar.addEventListener("click", reiniciarJoc);
+
+  // Event listener per al botó de sortir del joc
   btnSortir.addEventListener("click", sortirJoc);
 
+  // Inicia un nou joc
   function iniciarJoc() {
     if (!usuari) {
       usuari = document.getElementById("username").value;
@@ -72,14 +79,17 @@ document.addEventListener("DOMContentLoaded", function () {
     jocDiv.style.display = "flex";
   }
 
+  // Mostra la categoria de la paraula seleccionada
   function mostrarCategoria(categoria) {
     categoriaElement.textContent = `Categoria: ${categoria}`;
   }
 
+  // Mostra la paraula actual amb les lletres encertades
   function mostrarParaula() {
     paraulaElement.innerHTML = lletresEncertades.join(" ");
   }
 
+  // Mostra els botons per seleccionar les lletres de l'alfabet
   function mostrarLletres() {
     const lletres = "abcdefghijklmnopqrstuvwxyz";
     lletresElement.innerHTML = "";
@@ -92,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Selecciona una lletra i actualitza l'estat del joc
   function seleccionarLletra(lletra) {
     lletresUtilitzades.push(lletra);
     if (paraulaSeleccionada.includes(lletra)) {
@@ -110,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
     comprovarFiJoc();
   }
 
+  // Actualitza la imatge del penjat segons el nombre d'errors
   function actualitzarPenjat() {
     for (let i = 1; i <= maxErrors; i++) {
       const img = document.getElementById(`P${i}`);
@@ -118,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     numErrorsElement.textContent = errors;
   }
 
+  // Comprova si el joc ha acabat
   function comprovarFiJoc() {
     if (lletresEncertades.join("") === paraulaSeleccionada) {
       mostrarMissatgeFinal("Has guanyat!");
@@ -126,22 +139,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Mostra el missatge final del joc
   function mostrarMissatgeFinal(missatge) {
     missatgeFinal.textContent = missatge;
     missatgeFinal.style.display = "block";
     btnReiniciar.style.display = "block";
     btnSortir.style.display = "block";
-    jocDiv.querySelectorAll("button").forEach((btn) => (btn.disabled = true));
+    jocDiv
+      .querySelectorAll(".lletresDiv button")
+      .forEach((btn) => (btn.disabled = true));
   }
 
+  // Reinicia el joc
   function reiniciarJoc() {
     iniciarJoc();
     missatgeFinal.style.display = "none";
     btnReiniciar.style.display = "none";
     btnSortir.style.display = "none";
-    jocDiv.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
+    jocDiv
+      .querySelectorAll(".lletresDiv button")
+      .forEach((btn) => (btn.disabled = false));
   }
 
+  // Surt del joc i elimina l'estat guardat
   function sortirJoc() {
     localStorage.removeItem("estatJoc");
     formDiv.style.display = "flex";
@@ -153,6 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     usuari = "";
   }
 
+  // Guarda l'estat actual del joc en localStorage
   function guardarEstatJoc() {
     const estatJoc = {
       paraulaSeleccionada,
